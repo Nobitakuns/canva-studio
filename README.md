@@ -1,6 +1,8 @@
 # Canva Pro Design Studio 🎨
 
-> **Note**: coppy paste by VN
+> **Note**: coppy paste by VN  
+> **Repository**: [https://github.com/Nobitakuns/canva-studio](https://github.com/Nobitakuns/canva-studio)  
+> 📖 **Xem hướng dẫn chi tiết A-Z**: [HUONG_DAN_CAI_DAT.md](HUONG_DAN_CAI_DAT.md)
 
 Ứng dụng web thiết kế đồ họa trực tuyến tái hiện 100% công năng, tính năng và giao diện của **[Canva.com](https://www.canva.com/)**, kết hợp công nghệ phân tích ngược từ **[REA (Reverse Engineer Anything)](https://github.com/morluto/rea)**.
 
@@ -37,40 +39,88 @@ Tối ưu hóa hoàn hảo cho cả trình duyệt máy tính (Desktop) lẫn đ
 5. **Tối ưu 100% Trình duyệt Di động (Canva Mobile App)**:
    - Nút tròn nổi lớn `[ ➕ ]` mở Bottom Sheet Drawer trượt mượt mà.
    - Artboard tự động co giãn vừa vặn màn hình điện thoại (scale 28%), không bị tràn khung.
+   - Cử chỉ chạm ngón tay co giãn, di chuyển và xoay đối tượng.
 
 6. **Tích hợp REA (Reverse Engineer Anything)**:
    - Trích xuất bảng màu, cấu trúc DOM và tài nguyên từ bất kỳ website nào để tái hiện thành các layer thiết kế trên Artboard.
 
 ---
 
-## 🚀 Hướng Dẫn Khởi Chạy
+## 🚀 HƯỚNG DẪN CÀI ĐẶT & KHỞI CHẠY CHI TIẾT
 
-### 1. Khởi chạy nhanh trên macOS (1 chạm)
-Chỉ cần nhấp đúp chuột vào file:
+> Xem file hướng dẫn mở rộng đầy đủ hình ảnh và cách giải quyết sự cố tại: [HUONG_DAN_CAI_DAT.md](HUONG_DAN_CAI_DAT.md)
+
+### 1. Yêu Cầu Cần Có
+- **Node.js**: Phiên bản 18 trở lên (Khuyến nghị 20 LTS hoặc 22 LTS).  
+  *Nếu máy chưa có Node.js: Truy cập [https://nodejs.org/](https://nodejs.org/) tải bản LTS và cài đặt chỉ trong 1 phút.*
+- **Git** (nếu cài đặt qua clone GitHub).
+
+---
+
+### 2. Tải Mã Nguồn
+
+#### Cách A: Tải qua Git (Khuyên dùng)
 ```bash
-Start_Canva.command
+git clone https://github.com/Nobitakuns/canva-studio.git
+cd canva-studio
 ```
-Hệ thống sẽ tự động bật server và mở ngay trình duyệt tại `http://localhost:3030/`.
 
-### 2. Khởi chạy thủ công qua Terminal
+#### Cách B: Dùng thư mục có sẵn trên máy
 ```bash
-# Cài đặt thư viện phụ thuộc
-npm install
+cd "/Users/masterdzj/Documents/web/canvas"
+```
 
-# Khởi chạy server
+---
+
+### 3. Cài Đặt Thư Viện (Dependencies)
+Chạy lệnh sau tại thư mục dự án:
+```bash
+npm install
+```
+
+---
+
+### 4. Khởi Chạy Ứng Dụng
+
+#### Cách 1: Bấm đúp 1-Click trên macOS (Dễ nhất)
+Nhấp đúp chuột vào file:
+- `Start_Canva.command` hoặc `Khởi_Động_Canva.command`
+
+Server sẽ tự động kích hoạt và mở ngay trình duyệt tại `http://localhost:3030/`.
+
+#### Cách 2: Chạy lệnh qua Terminal / Command Prompt
+```bash
 npm start
 ```
-Mở trình duyệt và truy cập:
-- Máy tính: `http://localhost:3030/`
-- Điện thoại (trong cùng mạng Wi-Fi): `http://<IP_MÁY_TÍNH>:3030/`
+hoặc:
+```bash
+node server.js
+```
+
+Sau khi màn hình thông báo khởi động thành công, mở trình duyệt:
+- **Trên máy tính**: Mở [http://localhost:3030/](http://localhost:3030/)
+- **Trên điện thoại** (kết nối cùng Wi-Fi): Nhập `http://<IP_MÁY_TÍNH>:3030/` (ví dụ `http://192.168.1.15:3030/`).
+
+---
+
+### 5. Hướng Dẫn Sử Dụng Trên Điện Thoại Di Động
+1. Đảm bảo điện thoại và máy tính kết nối **chung một mạng Wi-Fi**.
+2. Tìm địa chỉ IP máy tính:
+   - **macOS**: Chạy lệnh `ipconfig getifaddr en0` trên Terminal.
+   - **Windows**: Chạy lệnh `ipconfig` trên CMD (tìm dòng `IPv4 Address`).
+3. Mở trình duyệt Safari / Chrome trên điện thoại, truy cập `http://<IP_MÁY_TÍNH>:3030`.
+4. Bấm nút **Chia sẻ > Thêm vào Màn hình chính (Add to Home Screen)** để sử dụng như một App Canva độc lập!
 
 ---
 
 ## 🛠️ Công Nghệ Sử Dụng
 - **Frontend**: Vanilla JS (ES6+), HTML5 Canvas, SVG Snapping Engine, CSS3 Flexbox/Grid, Responsive Touch Events.
 - **Backend**: Node.js, Express.js.
-- **Reverse Engineering**: [REA (Reverse Engineer Anything)](https://github.com/morluto/rea) v6.7.0.
+- **Reverse Engineering Engine**: [REA (Reverse Engineer Anything)](https://github.com/morluto/rea) v6.7.0.
 
 ---
 
-*Ghi chú bản quyền: coppy paste by VN*
+## 📌 Ghi Chú Bản Quyền
+- Tác giả: **Duy Nguyễn (Nobitakuns)**
+- Ghi chú: `coppy paste by VN`
+- Repository: [https://github.com/Nobitakuns/canva-studio](https://github.com/Nobitakuns/canva-studio)
