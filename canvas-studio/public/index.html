@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Canva Pro Design Studio — Thiết kế Đồ họa Kéo Thả Trực quan</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Roboto:wght@400;500;700&family=Oswald:wght@500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- ================= TOP HEADER BAR ================= -->
+  <header class="canva-top-header">
+    <div class="header-left">
+      <div class="canva-brand-logo" onclick="window.canva.fitToScreen()" title="Canva Design Studio">Canva</div>
+      
+      <button class="header-menu-btn" id="fileMenuBtn" title="Menu Tệp">
+        <span>Tệp</span> ▾
+      </button>
+
+      <button class="header-menu-btn" id="triggerResizeBtn" title="Đổi cỡ thiết kế & Magic Switch">
+        <span style="color: #c084fc;">👑</span> <span>Đổi cỡ</span>
+      </button>
+
+      <div class="tb-divider" style="height: 18px;"></div>
+
+      <button class="header-menu-btn" id="undoHeaderBtn" title="Hoàn tác (Ctrl+Z)">↺</button>
+      <button class="header-menu-btn" id="redoHeaderBtn" title="Làm lại (Ctrl+Y)">↻</button>
+
+      <div class="cloud-status-badge" id="cloudSaveStatus">
+        <span>✔</span> Đã lưu tất cả thay đổi
+      </div>
+    </div>
+
+    <!-- Center Editable Title -->
+    <div class="header-center">
+      <input type="text" class="design-title-input" id="designTitleInput" value="Thiết kế chưa có tên - Bài đăng Instagram" />
+    </div>
+
+    <div class="header-right">
+      <button class="btn-rea-tool" id="reaModalBtn" title="Trích xuất thiết kế từ web bằng REA (github.com/morluto/rea)">
+        <span>⚡ REA Trích xuất</span>
+      </button>
+
+      <button class="header-menu-btn" id="presentationBtn" title="Chế độ thuyết trình toàn màn hình">
+        <span>📽️ Trình chiếu</span>
+      </button>
+
+      <button class="btn-canva-download" id="triggerDownloadBtn" title="Tải xuống thiết kế PNG / JPG / PDF">
+        <span>⬇ Tải xuống</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ================= CONTEXTUAL TOP TOOLBAR ================= -->
+  <div class="contextual-top-toolbar" id="contextualTopToolbar">
+    <!-- 1. Text Element Toolbar -->
+    <div class="contextual-pane" id="contextTextToolbar" style="display: none;">
+      <select class="tb-select" id="fontFamilySelect" title="Phông chữ">
+        <option value="Inter">Inter (Hiện đại)</option>
+        <option value="Montserrat">Montserrat (Mạnh mẽ)</option>
+        <option value="Playfair Display">Playfair Display (Sang trọng)</option>
+        <option value="Roboto">Roboto (Tiêu chuẩn)</option>
+        <option value="Oswald">Oswald (Cô đọng)</option>
+        <option value="Dancing Script">Dancing Script (Viết tay)</option>
+      </select>
+
+      <div class="font-size-stepper">
+        <button class="btn-stepper-small" id="fontSizeDecBtn">−</button>
+        <input type="text" class="input-stepper-val" id="fontSizeInput" value="36" />
+        <button class="btn-stepper-small" id="fontSizeIncBtn">+</button>
+      </div>
+
+      <div class="tb-color-picker-wrap" title="Màu chữ">
+        <span style="font-weight: 800; font-size: 15px; color: var(--text-main);">A</span>
+        <input type="color" class="tb-color-input" id="textColorInput" value="#111827" />
+      </div>
+
+      <div class="tb-divider"></div>
+
+      <button class="tb-btn" id="boldBtn" title="In đậm (Ctrl+B)"><b>B</b></button>
+      <button class="tb-btn" id="italicBtn" title="In nghiêng (Ctrl+I)"><i>I</i></button>
+      <button class="tb-btn" id="underlineBtn" title="Gạch chân (Ctrl+U)"><u>U</u></button>
+
+      <div class="tb-divider"></div>
+
+      <button class="tb-btn" id="alignLeftBtn" title="Căn trái">⇤</button>
+      <button class="tb-btn" id="alignCenterBtn" title="Căn giữa">⇥⇤</button>
+      <button class="tb-btn" id="alignRightBtn" title="Căn phải">⇥</button>
+
+      <div class="tb-divider"></div>
+
+      <button class="tb-btn btn-center-canvas" title="Căn vào giữa trang Canvas">🎯 Giữa trang</button>
+      <button class="tb-btn btn-bring-forward" title="Đưa lên lớp trên">⇧ Lên trên</button>
+      <button class="tb-btn btn-send-backward" title="Đưa xuống lớp dưới">⇩ Xuống dưới</button>
+      <button class="tb-btn btn-duplicate-action" title="Nhân bản (Ctrl+D)">➕ Nhân bản</button>
+      <button class="tb-btn btn-delete-action" style="color: #ef4444;" title="Xóa (Delete)">🗑️ Xóa</button>
+    </div>
+
+    <!-- 2. Shape / Image Toolbar -->
+    <div class="contextual-pane" id="contextShapeToolbar" style="display: none;">
+      <div class="tb-color-picker-wrap" title="Màu sắc hình khối">
+        <span style="font-size: 14px;">🎨</span>
+        <input type="color" class="tb-color-input" id="shapeFillColorInput" value="#7d2ae8" />
+      </div>
+
+      <div class="tb-divider"></div>
+
+      <button class="tb-btn btn-center-canvas">🎯 Giữa trang</button>
+      <button class="tb-btn btn-bring-forward">⇧ Lên trên</button>
+      <button class="tb-btn btn-send-backward">⇩ Xuống dưới</button>
+      <button class="tb-btn btn-duplicate-action">➕ Nhân bản</button>
+      <button class="tb-btn btn-delete-action" style="color: #ef4444;">🗑️ Xóa</button>
+    </div>
+
+    <!-- 3. Canvas Background Toolbar -->
+    <div class="contextual-pane" id="contextCanvasToolbar" style="display: flex;">
+      <span style="font-size: 12px; color: var(--text-muted);">Màu nền trang:</span>
+      <div class="tb-color-picker-wrap" title="Đổi màu nền Canvas">
+        <span style="font-size: 14px;">🎨</span>
+        <input type="color" class="tb-color-input" id="canvasBgColorInput" value="#ffffff" />
+      </div>
+      <span style="font-size: 12px; color: var(--text-dim); margin-left: 8px;">Nhấp vào phần tử bất kỳ để chỉnh sửa thuộc tính</span>
+    </div>
+  </div>
+
+  <!-- ================= MAIN WORKSPACE ================= -->
+  <main class="studio-main-workspace">
+    <!-- LEFT RAIL DOCK (72px) -->
+    <aside class="canva-dock-rail" aria-label="Canva Tool Dock">
+      <button class="dock-item active" data-tab="templates" title="Mẫu thiết kế">
+        <span class="dock-icon">🎨</span>
+        <span class="dock-label">Thiết kế</span>
+      </button>
+
+      <button class="dock-item" data-tab="elements" title="Thành phần & Hình khối">
+        <span class="dock-icon">🧩</span>
+        <span class="dock-label">Thành phần</span>
+      </button>
+
+      <button class="dock-item" data-tab="text" title="Thêm chữ & Phông nghệ thuật">
+        <span class="dock-icon">🔤</span>
+        <span class="dock-label">Văn bản</span>
+      </button>
+
+      <button class="dock-item" data-tab="uploads" title="Tải ảnh lên">
+        <span class="dock-icon">📤</span>
+        <span class="dock-label">Tải lên</span>
+      </button>
+
+      <button class="dock-item" data-tab="layers" title="Quản lý Layer">
+        <span class="dock-icon">📑</span>
+        <span class="dock-label">Lớp</span>
+      </button>
+
+      <button class="dock-item" data-tab="magic" title="AI Magic Studio">
+        <span class="dock-icon">🪄</span>
+        <span class="dock-label">Magic AI</span>
+      </button>
+    </aside>
+
+    <!-- SLIDING DRAWER PANEL (340px) -->
+    <section class="canva-drawer-panel open" id="canvaDrawerPanel" aria-label="Bảng Mở Rộng">
+      <div class="drawer-header">
+        <h2 class="drawer-title" id="drawerTitle">Bộ sưu tập mẫu</h2>
+        <button class="btn-drawer-close" id="drawerCloseBtn" title="Thu gọn bảng">◀</button>
+      </div>
+
+      <div class="drawer-body">
+        <!-- 1. Templates Pane -->
+        <div class="drawer-content-pane active" id="tabPane_templates">
+          <div class="drawer-search-box">
+            <span>🔍</span>
+            <input type="text" class="drawer-search-input" placeholder="Tìm kiếm mẫu thiết kế..." />
+          </div>
+          <div class="templates-grid">
+            <div class="template-card-preview" data-template="default">
+              <div class="template-thumb-box" style="background: #0f172a; color: white;">
+                <span style="font-weight: 800; font-size: 13px;">CANVA PRO</span>
+                <span style="font-size: 10px; color: #38bdf8;">Đồ họa chuyên nghiệp</span>
+              </div>
+              <div class="template-card-title">Mẫu Quảng Bá Pro</div>
+            </div>
+
+            <div class="template-card-preview" data-template="sale">
+              <div class="template-thumb-box" style="background: #18181b; color: #facc15;">
+                <span style="font-weight: 900; font-size: 15px;">SALE 50%</span>
+                <span style="font-size: 10px; color: #ef4444;">HOT DEAL</span>
+              </div>
+              <div class="template-card-title">Siêu Sale Giảm Giá</div>
+            </div>
+
+            <div class="template-card-preview" data-template="coffee">
+              <div class="template-thumb-box" style="background: #292524; color: #fef3c7;">
+                <span style="font-family: serif; font-size: 14px;">COFFEE TIME</span>
+                <span style="font-size: 10px; color: #d6d3d1;">Hương vị đậm đà</span>
+              </div>
+              <div class="template-card-title">Ẩm thực & Cà phê</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Elements Pane -->
+        <div class="drawer-content-pane" id="tabPane_elements">
+          <h3 style="font-size: 13px; margin-bottom: 10px; color: var(--text-muted);">Hình dạng & Khối</h3>
+          <div class="shapes-grid">
+            <div class="shape-grid-item" data-shape="rect" data-color="#7d2ae8" title="Chữ nhật">⬛</div>
+            <div class="shape-grid-item" data-shape="rounded" data-color="#00c4cc" title="Bo góc">🔲</div>
+            <div class="shape-grid-item" data-shape="circle" data-color="#f59e0b" title="Hình tròn">⭕</div>
+            <div class="shape-grid-item" data-shape="triangle" data-color="#10b981" title="Tam giác">▲</div>
+            <div class="shape-grid-item" data-shape="star" data-color="#ef4444" title="Ngôi sao">⭐</div>
+          </div>
+
+          <h3 style="font-size: 13px; margin: 16px 0 10px; color: var(--text-muted);">Màu sắc nổi bật</h3>
+          <div class="shapes-grid">
+            <div class="shape-grid-item" data-shape="circle" data-color="#ec4899" style="background: #ec4899;"></div>
+            <div class="shape-grid-item" data-shape="circle" data-color="#8b5cf6" style="background: #8b5cf6;"></div>
+            <div class="shape-grid-item" data-shape="circle" data-color="#3b82f6" style="background: #3b82f6;"></div>
+            <div class="shape-grid-item" data-shape="circle" data-color="#10b981" style="background: #10b981;"></div>
+          </div>
+        </div>
+
+        <!-- 3. Text Pane -->
+        <div class="drawer-content-pane" id="tabPane_text">
+          <button class="btn-add-text-large" id="addHeadingBtn">
+            <h2>Thêm tiêu đề</h2>
+          </button>
+          <button class="btn-add-text-large" id="addSubheadingBtn">
+            <h3>Thêm một tiêu đề phụ</h3>
+          </button>
+          <button class="btn-add-text-large" id="addBodyTextBtn">
+            <p>Thêm một chút nội dung nội dung</p>
+          </button>
+
+          <h3 style="font-size: 13px; margin: 20px 0 10px; color: var(--text-muted);">Tổ hợp phông chữ nghệ thuật</h3>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div class="preset-text-card template-card-preview" data-text="MEGA SALE\n50% OFF" style="padding: 12px; text-align: center;">
+              <span style="font-family: 'Montserrat'; font-size: 18px; font-weight: 900; color: #facc15;">MEGA SALE 50%</span>
+            </div>
+            <div class="preset-text-card template-card-preview" data-text="CHÚC MỪNG NĂM MỚI" style="padding: 12px; text-align: center;">
+              <span style="font-family: 'Dancing Script'; font-size: 20px; color: #ec4899;">Chúc Mừng Năm Mới</span>
+            </div>
+            <div class="preset-text-card template-card-preview" data-text="VIBES & GLOW" style="padding: 12px; text-align: center;">
+              <span style="font-family: 'Playfair Display'; font-size: 18px; color: #38bdf8;">VIBES & GLOW</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Uploads Pane -->
+        <div class="drawer-content-pane" id="tabPane_uploads">
+          <input type="file" id="imageUploadInput" accept="image/*" style="display: none;" />
+          <button class="btn-trigger-upload" id="triggerUploadBtn">📤 Tải lên tệp phương tiện</button>
+          <div class="uploads-gallery-grid" id="userUploadsGrid"></div>
+        </div>
+
+        <!-- 5. Layers Pane -->
+        <div class="drawer-content-pane" id="tabPane_layers">
+          <div class="layers-list" id="layersList"></div>
+        </div>
+
+        <!-- 6. AI Magic Studio Pane -->
+        <div class="drawer-content-pane" id="tabPane_magic">
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">Mô tả ý tưởng của bạn, AI sẽ tự động tạo bố cục và phối màu:</p>
+          <textarea class="form-input" id="aiDesignPromptInput" placeholder="Ví dụ: Giảm giá mùa hè 50%, Quán cà phê chill, Khóa học lập trình..." rows="3" style="resize: none; margin-bottom: 10px;"></textarea>
+          <button class="btn-modal-action" id="aiGenerateDesignBtn" style="margin-top: 0;">✨ Tạo Bản Thiết Kế Bằng AI</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CENTER STAGE AREA (ARTBOARD WORKSPACE) -->
+    <section class="canva-stage-area" id="canvaStageArea" aria-label="Khu vực Artboard">
+      <div class="artboard-wrapper" id="artboardWrapper">
+        <div class="canva-artboard" id="canvaArtboard">
+          <!-- Elements dynamically rendered by canva-engine.js -->
+        </div>
+        <!-- Smart Snapping Lines SVG Overlay -->
+        <svg class="snapping-guide-svg" id="snappingGuideSvg"></svg>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= BOTTOM ZOOM & VIEW BAR ================= -->
+  <footer class="canva-bottom-bar">
+    <div style="font-size: 12px; color: var(--text-muted);">
+      Trang 1 / 1
+    </div>
+
+    <div class="zoom-controls">
+      <button class="btn-zoom" id="zoomOutBtn" title="Thu nhỏ">−</button>
+      <input type="range" class="zoom-slider" id="zoomRangeSlider" min="20" max="200" value="55" />
+      <button class="btn-zoom" id="zoomInBtn" title="Phóng to">+</button>
+      <span class="zoom-percent-text" id="zoomPercentText">55%</span>
+      <button class="header-menu-btn" id="zoomFitBtn" style="padding: 4px 8px; font-size: 12px;" title="Vừa màn hình">Vừa khổ</button>
+    </div>
+  </footer>
+
+  <!-- ================= MOBILE FLOATING ACTION BUTTON [ ➕ ] ================= -->
+  <button class="mobile-fab-btn" id="mobileAddFab" title="Thêm phần tử vào thiết kế">➕</button>
+
+  <!-- ================= MOBILE BOTTOM SHEET DRAWER ================= -->
+  <div class="mobile-bottom-sheet" id="mobileBottomSheet">
+    <div style="padding: 12px 16px 4px; display: flex; justify-content: space-between; align-items: center;">
+      <strong style="font-size: 15px;">Thêm vào thiết kế</strong>
+      <button class="btn-drawer-close" id="closeMobileSheetBtn">✕</button>
+    </div>
+    <div class="mobile-sheet-tabs-bar">
+      <button class="mobile-sheet-tab-btn active" data-tab="templates">🎨 Mẫu</button>
+      <button class="mobile-sheet-tab-btn" data-tab="elements">🧩 Thành phần</button>
+      <button class="mobile-sheet-tab-btn" data-tab="text">🔤 Văn bản</button>
+      <button class="mobile-sheet-tab-btn" data-tab="uploads">📤 Tải lên</button>
+    </div>
+    <div class="mobile-sheet-body">
+      <div class="mobile-sheet-pane active" id="mobileTab_templates">
+        <div class="templates-grid">
+          <div class="template-card-preview" data-template="default">
+            <div class="template-thumb-box" style="background: #0f172a; color: white;">
+              <strong>CANVA PRO</strong>
+            </div>
+            <div class="template-card-title">Quảng Bá Pro</div>
+          </div>
+          <div class="template-card-preview" data-template="sale">
+            <div class="template-thumb-box" style="background: #18181b; color: #facc15;">
+              <strong>SALE 50%</strong>
+            </div>
+            <div class="template-card-title">Khuyến Mãi</div>
+          </div>
+        </div>
+      </div>
+      <div class="mobile-sheet-pane" id="mobileTab_elements">
+        <div class="shapes-grid">
+          <div class="shape-grid-item" data-shape="rect">⬛</div>
+          <div class="shape-grid-item" data-shape="circle">⭕</div>
+          <div class="shape-grid-item" data-shape="triangle">▲</div>
+          <div class="shape-grid-item" data-shape="star">⭐</div>
+        </div>
+      </div>
+      <div class="mobile-sheet-pane" id="mobileTab_text">
+        <button class="btn-add-text-large" onclick="window.canva.addText('heading'); document.getElementById('mobileBottomSheet').classList.remove('open');">
+          <h2>Thêm tiêu đề</h2>
+        </button>
+        <button class="btn-add-text-large" onclick="window.canva.addText('body'); document.getElementById('mobileBottomSheet').classList.remove('open');">
+          <p>Thêm văn bản phụ</p>
+        </button>
+      </div>
+      <div class="mobile-sheet-pane" id="mobileTab_uploads">
+        <button class="btn-trigger-upload" onclick="document.getElementById('imageUploadInput').click()">📤 Chọn ảnh từ điện thoại</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= DOWNLOAD MODAL ================= -->
+  <div class="canva-modal-overlay" id="downloadModal">
+    <div class="canva-modal-card">
+      <div class="canva-modal-header">
+        <h3>Tải xuống bản thiết kế</h3>
+        <button class="btn-drawer-close" id="closeDownloadModalBtn">✕</button>
+      </div>
+      <div class="canva-modal-body">
+        <div class="form-group">
+          <label>Loại tệp tin:</label>
+          <select class="form-select" id="downloadFormatSelect">
+            <option value="png" selected>PNG (Hình ảnh chất lượng cao)</option>
+            <option value="jpg">JPG (Kích thước tệp nhỏ gọn)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Độ phân giải:</label>
+          <select class="form-select" id="downloadSizeSelect">
+            <option value="1">1x (1080 x 1080 px - Chuẩn)</option>
+            <option value="2">2x (2160 x 2160 px - Sắc nét Retina)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+            <input type="checkbox" id="downloadTransparentCheck" />
+            <span>Nền trong suốt (Transparent background PNG)</span>
+          </label>
+        </div>
+        <button class="btn-modal-action" id="confirmDownloadBtn">Tải xuống ngay</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= RESIZE & MAGIC SWITCH MODAL ================= -->
+  <div class="canva-modal-overlay" id="resizeModal">
+    <div class="canva-modal-card">
+      <div class="canva-modal-header">
+        <h3>👑 Đổi kích cỡ (Magic Switch)</h3>
+        <button class="btn-drawer-close" id="closeResizeModalBtn">✕</button>
+      </div>
+      <div class="canva-modal-body">
+        <div class="form-group">
+          <label>Chọn kích thước chuẩn:</label>
+          <select class="form-select" id="resizePresetSelect">
+            <option value="square" selected>Bài đăng Instagram (1080 x 1080 px)</option>
+            <option value="story">Tin Instagram / TikTok (1080 x 1920 px)</option>
+            <option value="youtube">Hình thu nhỏ YouTube (1280 x 720 px)</option>
+            <option value="facebook">Ảnh bìa Facebook (1640 x 924 px)</option>
+            <option value="poster">Áp phích dọc (1200 x 1600 px)</option>
+          </select>
+        </div>
+        <button class="btn-modal-action" id="applyResizeBtn">Áp dụng kích thước mới</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= REA (REVERSE ENGINEER ANYTHING) MODAL ================= -->
+  <div class="canva-modal-overlay" id="reaModal">
+    <div class="canva-modal-card" style="max-width: 620px;">
+      <div class="canva-modal-header">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span>⚡</span>
+          <h3>REA — Trích Xuất & Tái Hiện Giao Diện</h3>
+        </div>
+        <button class="btn-drawer-close" id="reaCloseBtn">✕</button>
+      </div>
+      <div class="canva-modal-body">
+        <div id="reaStatusInfo" style="margin-bottom: 14px;"></div>
+        <div class="form-group">
+          <label>Nhập URL bất kỳ trang web nào để bóc tách thiết kế đưa vào Canva:</label>
+          <input type="text" class="form-input" id="reaTargetUrlInput" placeholder="https://example.com" value="https://canva.com" />
+        </div>
+        <button class="btn-modal-action" id="reaExtractToCanvaBtn" style="background: linear-gradient(135deg, #3b82f6, #8b5cf6);">
+          ⚡ Phân tích & Tái Hiện Lên Artboard
+        </button>
+        <div id="reaTerminalOutput" style="margin-top: 14px; font-family: monospace; font-size: 12px; background: #09090b; padding: 10px; border-radius: 8px; color: #a1a1aa; max-height: 140px; overflow-y: auto;">
+          Sẵn sàng kết nối công cụ REA CLI v6.7.0...
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT INCLUDES -->
+  <script src="/js/canva-engine.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>
